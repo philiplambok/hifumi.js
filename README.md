@@ -5,7 +5,7 @@ Javascript library that was inspired by Jquery
 
 ## Installation
 Download the hifumi.js from the repo and add this script to your project
-```
+```html
 <script src='hifumi.js'></script>
 ```
 
@@ -13,14 +13,15 @@ Download the hifumi.js from the repo and add this script to your project
 ### Selector
 ```js
 // Working with individual object
-$( '#id' ); 
+$('#id'); 
 
 // Working with collection object
-$( '.classes' ); // classes
-$( 'h1, h2' ); // multiple selector
-$( '.boxes #menu' ); // css selector
-$( '[name="username"]' ) // atribut selector
+$('.classes'); // classes
+$('h1, h2'); // multiple selector
+$('.boxes #menu'); // css selector
+$('[name="username"]') // atribut selector
 ```
+
 ### Built in function
 ```js
 // working with text
@@ -45,6 +46,11 @@ $('#id').on('click', function(){
 });
 ```
 
+## License
+Licensed under the MIT License. 
+
+## Learn More
+Comming Soon!
 
 
 
