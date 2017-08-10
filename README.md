@@ -36,9 +36,11 @@ $('.classes').css('color', 'deeppink');
 $('#id').on('click', function(){
 	console.log( '#id was clicked! ' );
 });
+$('[name="username"]').on('keydown', function(){
+	console.log('User is typing the username');
+});
 
 // also you can do chaining
-
 $('h1,h2').text('Title has changed!').css('color', 'blue');
 
 $('#id').on('click', function(){
