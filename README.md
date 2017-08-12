@@ -54,7 +54,7 @@ new Hifumi('h1','single').text('title').css('font-size','16px'); // Chaining!
  */
 var obj = new Hifumi('selector','type');
 
-obj.on('click', () =>{
+obj.on('click', () => {
 	obj.text('new game is good anime').css('color','gray');
 	console.log('Success!');
 });
