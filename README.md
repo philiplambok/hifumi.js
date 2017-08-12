@@ -1,5 +1,5 @@
 # hifumi.js
-Tiny Javascript Library For Weaboo 
+Tiny Javascript Library for Weaboo 
 
 ![Hifumi-Chan!!](http://68.media.tumblr.com/b0dde3d5f5763a0d8a72455b5ee681bc/tumblr_ocoo0q5xV31s5f9ado2_540.gif)
 
