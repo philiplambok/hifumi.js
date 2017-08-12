@@ -86,11 +86,3 @@ class Hifumi {
 		}
 	}
 }
-
-
-let test = new Hifumi( '.boxes', 'collection' );
-
-test.on('click', () =>{
-	test.css( 'color', 'deeppink' );
-});
-
