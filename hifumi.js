@@ -1,86 +1,96 @@
-/**
- * @author: Philip Lambok 
- * Hifumi.js >//<
- */
- 
-(function(){
-	function getElement( el )
+class Hifumi {
+
+	constructor( selector, type )
 	{
-		var firstLetter = el.charAt(0); 
+		// init
+		this.selector = selector;
+		this.type = type;
+		this.element = null;
+		this.single = false;
+		this.collection = false;
 
-		// for multi and css selector
-		if( (el.indexOf( ',' ) > 0) || ( el.indexOf(' ') > 0 ) ){
-			return document.querySelectorAll( el );
-		}
+		if( this.type === 'single' )
+			this.single = true;
+		else if (this.type === 'collection')
+			this.collection = true;
 
-		// standart selector
-		switch( firstLetter ){
-			case '#':
-				return document.getElementById( el.substr(1) ); 
-			case '.':
-				return document.getElementsByClassName( el.substr(1) );
-			case '[':
-				return document.querySelectorAll( el );
-			default:
-				return document.getElementsByTagName( el );
-		}
+		// get the elements
+		this.getElement();
+
 	}
 
-	var $ = function (el)
+	getElement()
 	{
-		if( this === window ) return new $( el );
-
-		if ( el instanceof Object )
-			this.el = el;
-		else	
-			this.el = getElement(el);
-
-		return this;
-	}
-
-	function callFunction( items, callback )
-	{
-		if( items.length ){
-			for( var i = 0; i < items.length; i++ ){
-				callback( items[i] );
-			}
-		}else{
-			callback( items );
-		}
-	}
-
-	/*  
-	* build in function chain
-	*/
-
-	$.prototype.text = function( text )
-	{
-		callFunction(this.el, function(el){
-			el.innerHTML = text;
-		});
+		if( this.single ){
 		
-		return this;
+			this.element =  document.querySelector( this.selector );
+		
+			return this;
+		}
+		else if( this.collection ) {
+		
+			this.element = document.querySelectorAll( this.selector );
+			return this;
+		
+		}
 	}
 
-
-	$.prototype.css = function( property, value )
+	text( newText )
 	{
-		callFunction(this.el, function(el){
-			el.style[property] = value
-		});
+		if( this.single ){
+		
+			this.element.textContent = newText;
 
-		return this;
+			return this;		
+		}else if( this.collection ){
+		
+			for( let current of this.element ){
+				current.textContent = newText;
+			}
+
+			return this;
+		}
 	}
 
-	$.prototype.on = function( event, callback )
+	css ( property, value )
 	{
-		callFunction( this.el, function( el ){
-			el.addEventListener( event, callback )			
-		});
+		if( this.single ){
+		
+			this.element.style[property] = value;
+			return this;
+		
+		}else if (this.collection) {
 
-		return this;
+			for( let current of this.element ){
+				current.style[property] = value;
+			}
+
+			return this;
+		}
 	}
 
-	// register the $
-	window.$ = $;
-})();
+	on( eventName, callback )
+	{
+		if( this.single ){
+		
+			this.element.addEventListener( eventName, callback );
+			
+			return this;
+		
+		}else if( this.collection ){
+			
+			for( let current of this.element ){
+				current.addEventListener( eventName, callback );
+			}
+			return this;
+		}
+	}
+}
+
+
+let test = new Hifumi( '.boxes', 'collection' );
+
+test.on('click', () =>{
+	test.css( 'color', 'deeppink' );
+});
+
